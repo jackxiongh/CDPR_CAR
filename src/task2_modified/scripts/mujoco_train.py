@@ -1,5 +1,4 @@
-from os import wait
-# from cv2 import getTickFrequency
+from cv2 import getTickFrequency
 import gym
 import numpy as np
 from mujoco_controller import car_mujoco_env
@@ -345,4 +344,3 @@ if __name__ == '__main__':
     obj = Omni_drag_object_env()
     h = obj.env.get_target_object_height()
     print(h)
-    test()

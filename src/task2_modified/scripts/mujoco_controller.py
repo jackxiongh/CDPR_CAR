@@ -1,7 +1,7 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-import mujoco as mp
+import mujoco_py as mp
 import numpy as np
 import math
 import os, sys
@@ -44,14 +44,14 @@ def eular2quat(yaw, pitch, roll):
 class car_mujoco_env():
     def __init__(self, render=False, debug=False, train=True, random_move=False, mode=1):
         if train:
-            self._model = mp.MjModel.from_xml_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_train.xml")))
+            self._model = mp.load_model_from_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_train.xml")))
         else:
             if mode == 1: # move line env
-                self._model = mp.MjModel.from_xml_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_test_line.xml")))
+                self._model = mp.load_model_from_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_test_line.xml")))
             elif mode == 2:
-                self._model = mp.MjModel.from_xml_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_test_eight.xml")))
+                self._model = mp.load_model_from_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_test_eight.xml")))
             elif mode == 3:
-                self._model = mp.MjModel.from_xml_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_test_tanh.xml")))
+                self._model = mp.load_model_from_path(os.path.abspath(os.path.join(sys.path[0], "../mujoco_model/omni_robot_reach_target_test_tanh.xml")))
 
         self._sim = mp.MjSim(self._model)
         if render:
