@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find task2_modified)/rviz/rviz_config.rviz" required="true" />
+    <node pkg="tf" type="static_transform_publisher" name="tf1" args="0 0 0 0 0 0 /map /world 20" />
+</launch>

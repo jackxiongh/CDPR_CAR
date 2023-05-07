@@ -1,0 +1,215 @@
+<mujoco model="omni_car">
+    <option	timestep="0.01" gravity="0 0 -9.81" solver="PGS"/>
+    <size nconmax="1000" njmax="1000"/>
+
+    <include file="../common/visual.xml"/>
+    <include file="../common/skybox.xml"/>
+    <include file="../common/materials.xml"/>
+
+    <worldbody>
+        <geom name="floor" size="1.5 2.7 .005" type="plane" material="grid"/>
+        <light name="lamp" active="true" directional="true" cutoff="4" exponent="20" diffuse="1 1 1" specular="0 0 0" pos="0 0 2.5" dir="0 0 -1 "/>       
+        
+        <body name= "target"  pos="3 3 .2" mocap="true">
+            <site type="cylinder" size=".05 .001"  rgba="1 1 1 0.0" />
+		</body>
+
+        <body name="obstacle" pos="3 3 0.05" mocap="true">
+            <geom type="cylinder" size="0.25 0.05" rgba="0 0 1 1" />
+        </body>
+
+        <body name="boarder" pos="0 0 0" euler="0 0 0">
+            <geom type="box" size="0.01 2.7 0.1" pos="1.51 0 0.1" rgba="0.3 0.3 0.4 1"/>
+            <geom type="box" size="0.01 2.7 0.1" pos="-1.51 0 0.1" rgba="0.3 0.3 0.4 1"/>
+            <geom type="box" size="1.5 0.01 0.1" pos="0 2.71 0.1" rgba="0.3 0.3 0.4 1"/>
+            <geom type="box" size="1.5 0.01 0.1" pos="0 -2.71 0.1" rgba="0.3 0.3 0.4 1"/>
+        </body>
+
+        <body name="car0_target" pos="0 0 0" mocap="true">
+            <site pos="0 0 0.05" type="box" size=".130 .09 .03 " rgba=".7 .5 .3 0.0"/>
+            <site pos="0.05 0 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+        </body>
+
+        <body name="car1_target" pos="0 0 0" mocap="true">
+            <site pos="0 0 0.05" type="box" size=".130 .09 .03 " rgba=".7 .5 .3 0.0"/>
+            <site pos="0.05 0.03 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+            <site pos="0.05 -0.03 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+        </body>
+
+        <body name="car2_target" pos="0 0 0" mocap="true">
+            <site pos="0 0 0.05" type="box" size=".130 .09 .03 " rgba=".7 .5 .3 0.0"/>
+            <site pos="0.04 0 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+            <site pos="0.07 -0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+            <site pos="0.07 0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+        </body>
+
+        <body name="car3_target" pos="0 0 0" mocap="true">
+            <site pos="0 0 0.05" type="box" size=".130 .09 .03 " rgba=".7 .5 .3 0.0"/>
+            <site pos="0.04 0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+            <site pos="0.04 -0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+            <site pos="0.08 0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+            <site pos="0.08 -0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 0.0"/>
+        </body>
+
+        <body name="omni_car" pos="-0.2 -1.8 .06" euler="0 0 90">
+            <geom pos="0 0 0.05" type="box" size=".130 .09 .03 " mass="2.8" material="self"/>
+            <geom name="car1_wheel1" pos="-.09 -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car1_wheel2" pos="-.09 .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car1_wheel3" pos=".09  -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car1_wheel4" pos=".09  .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car1_pole" pos="0.0 0.0 0.42" size="0.01 0.35" euler="0 0 0" type="cylinder" rgba="0.0 0.0 0.0 1" />
+
+            <site pos="0.05 0 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+
+            <joint type="slide" damping="10"  name="car1_x_joint" axis="1 0 0"/>
+            <joint type="slide" damping="10" name="car1_y_joint" axis="0 1 0"/>
+        
+            <site name="omni1_xvel_site" euler="0 0 0"/>
+            <site name="omni1_yvel_site" euler="0 0 90"/>
+
+            <site name="car1_stress_point" size="0.005" pos="0 0 .77"/>
+        </body>
+
+        <body name="omni_car2" pos="-0.2 -2.2 .06" euler="0 0 90">
+            <geom pos="0 0 0.05" type="box" size=".130 .109 .03 " mass="2.8" material="self"/>
+            <geom name="car2_wheel1" pos="-.09 -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car2_wheel2" pos="-.09 .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car2_wheel3" pos=".09  -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car2_wheel4" pos=".09  .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car2_pole" pos="0.0 0.0 0.42" size="0.01 0.35" euler="0 0 0" type="cylinder" rgba="0.0 0.0 0.0 1" />
+
+            <site pos="0.05 0.03 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+            <site pos="0.05 -0.03 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+
+            <joint type="slide" damping="10"  name="car2_x_joint" axis="1 0 0"/>
+            <joint type="slide" damping="10" name="car2_y_joint" axis="0 1 0"/>
+        
+            <site name="omni2_xvel_site" euler="0 0 0"/>
+            <site name="omni2_yvel_site" euler="0 0 90"/>
+
+            <site name="car2_stress_point" size="0.005" pos="0 0 .77"/>
+        </body>
+
+        <body name="omni_car3" pos="0.2 -2.2 .06" euler="0 0 90">
+            <geom pos="0 0 0.05" type="box" size=".130 .109 .03 " mass="2.8" material="self"/>
+            <geom name="car3_wheel1" pos="-.09 -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car3_wheel2" pos="-.09 .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car3_wheel3" pos=".09  -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car3_wheel4" pos=".09  .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car3_pole" pos="0.0 0.0 0.42" size="0.01 0.35" euler="0 0 0" type="cylinder" rgba="0.0 0.0 0.0 1" />
+
+            <site pos="0.04 0 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+            <site pos="0.07 -0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+            <site pos="0.07 0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+
+            <joint type="slide" damping="10"  name="car3_x_joint" axis="1 0 0"/>
+            <joint type="slide" damping="10" name="car3_y_joint" axis="0 1 0"/>
+        
+            <site name="omni3_xvel_site" euler="0 0 0"/>
+            <site name="omni3_yvel_site" euler="0 0 90"/>
+
+            <site name="car3_stress_point" size="0.005" pos="0 0 .77"/>
+        </body>
+
+        <body name="omni_car4" pos="0.2 -1.8 .06" euler="0 0 90">
+            <geom pos="0 0 0.05" type="box" size=".130 .109 .03 " mass="2.8" material="self"/>
+            <geom name="car4_wheel1" pos="-.09 -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car4_wheel2" pos="-.09 .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car4_wheel3" pos=".09  -.115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car4_wheel4" pos=".09  .115 0" size="0.05 0.02" euler="90 0 0" type="cylinder" rgba="0.4 0.4 0.4 1" />
+            <geom name="car4_pole" pos="0.0 0.0 0.42" size="0.01 0.35" euler="0 0 0" type="cylinder" rgba="0.0 0.0 0.0 1" />
+
+            <site pos="0.04 0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+            <site pos="0.04 -0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+            <site pos="0.08 0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+            <site pos="0.08 -0.02 0.081" type="cylinder" size="0.015 0.0001" rgba="1 0 0 1"/>
+
+            <joint type="slide" damping="10"  name="car4_x_joint" axis="1 0 0"/>
+            <joint type="slide" damping="10" name="car4_y_joint" axis="0 1 0"/>
+        
+            <site name="omni4_xvel_site" euler="0 0 0"/>
+            <site name="omni4_yvel_site" euler="0 0 90"/>
+
+            <site name="car4_stress_point" size="0.005" pos="0 0 .77"/>
+        </body>
+
+        <body name="target_object" pos="0 -2 .25" euler="0 0 90">
+            <joint type="slide" axis="1 0 0" damping="0"/>
+            <joint type="slide" axis="0 1 0" damping="0"/>
+            <joint type="slide" axis="0 0 1" damping="0"/>
+            <joint type="hinge" axis="1 0 0" damping="0"/>
+            <joint type="hinge" axis="0 1 0" damping="0"/>
+            <joint type="hinge" axis="0 0 1" damping="0"/>
+            <geom name="object_geom" type="cylinder" size=".05 .02"  rgba="0 .9 0 1" mass="0.01" />
+            <site name="car1_target" size="0.005" pos="0.0354 0.0354 0.015"/>
+            <site name="car2_target" size="0.005" pos="-0.0354 0.0354 0.015"/>
+            <site name="car3_target" size="0.005" pos="-.0354 -.0354 .015"/>
+            <site name="car4_target" size="0.005" pos=".0354 -.0354 .015"/>
+            <site type="cylinder" pos="0.04 0.0 0.02" size="0.01 0.005" rgba="1 0 0 1" />
+        </body>
+    </worldbody>
+
+    <tendon>
+        <spatial name="string1" limited="true" range="0 0.7" width="0.005" rgba="1 0 0 1">
+            <site site="car1_stress_point"/>
+            <site site="car1_target"/>
+        </spatial>
+
+        <spatial name="string2" limited="true" range="0 0.7" width="0.005" rgba="1 0 0 1">
+            <site site="car2_stress_point"/>
+            <site site="car2_target"/>
+        </spatial>
+
+        <spatial name="string3" limited="true" range="0 0.7" width="0.005" rgba="1 0 0 1">
+            <site site="car3_stress_point"/>
+            <site site="car3_target"/>
+        </spatial>
+
+        <spatial name="string4" limited="true" range="0 0.7" width="0.005" rgba="1 0 0 1">
+            <site site="car4_stress_point"/>
+            <site site="car4_target"/>
+        </spatial>
+    </tendon>
+
+    <actuator>
+        <motor joint="car1_x_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car1_y_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car2_x_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car2_y_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car3_x_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car3_y_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car4_x_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+        <motor joint="car4_y_joint" ctrllimited="true" ctrlrange="-.2 .2" gear="10"/>
+    </actuator>
+
+    <sensor>
+        <velocimeter name="omni1_xvel_sensor" site="omni1_xvel_site"/>
+        <velocimeter name="omni1_yvel_sensor" site="omni1_yvel_site"/>
+        <velocimeter name="omni2_xvel_sensor" site="omni2_xvel_site"/>
+        <velocimeter name="omni2_yvel_sensor" site="omni2_yvel_site"/>
+        <velocimeter name="omni3_xvel_sensor" site="omni3_xvel_site"/>
+        <velocimeter name="omni3_yvel_sensor" site="omni3_yvel_site"/>
+        <velocimeter name="omni4_xvel_sensor" site="omni4_xvel_site"/>
+        <velocimeter name="omni4_yvel_sensor" site="omni4_yvel_site"/>
+    </sensor>
+
+    <contact>
+        <pair geom1="car1_wheel1" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car1_wheel2" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car1_wheel3" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car1_wheel4" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car2_wheel1" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car2_wheel2" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car2_wheel3" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car2_wheel4" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car3_wheel1" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car3_wheel2" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car3_wheel3" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car3_wheel4" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car4_wheel1" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car4_wheel2" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car4_wheel3" geom2="floor" friction="0.082 0.082" />
+        <pair geom1="car4_wheel4" geom2="floor" friction="0.082 0.082" />
+    </contact>
+
+</mujoco>
